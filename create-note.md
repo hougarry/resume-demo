@@ -41,3 +41,19 @@ from .models import *
 
 
 ### create models forms.py in main
+
+### create views.py in main
+
+### create templates folder in main
+create a folder called main in templates folder, this is where we put all the html files
+
+### run pip freeze
+run pip freeze to check if we have all the packages we need
+```
+pip freeze > requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+```
