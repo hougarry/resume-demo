@@ -30,4 +30,14 @@ step 1-4
 
 ### create urls.py in main
 
-### modify admin.py in main/migrations
+### modify models.py in main
+
+### modify admin.py in main/  !!!important 
+from .models import *
+
+### create signals.py in main
+
+### connect signals.py in apps.py in main
+
+
+### create models forms.py in main
