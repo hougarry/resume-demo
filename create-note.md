@@ -29,3 +29,5 @@ step 1-4
 ### modify urls.py in resume_demo
 
 ### create urls.py in main
+
+### modify admin.py in main/migrations
