@@ -173,4 +173,21 @@ After the static files are collected, they are stored in the static folder in th
 
 #### 1. save index.html in templates/main as base.html
 #### 2. create partials folder in templates/main, then create header.html, footer.html, and nav.html
-#### 3. modify base.html and add {% load static %} at the top
+#### 3. modify base.html and add {% load static %} at the top, then add {% include 'partials/header.html' %} and {% include 'partials/footer.html' %} in the body, also we can add links to css files and js files, like this:
+```html
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+```
+After that , move all the navigation bar content in base.html to nav.html, and add {% load static %} at the top of nav.html, then add {% include 'partials/nav.html' %} in base.html
+
+replace those in all files:
+```
+"images/ 
+"{% static 'images/
+
+.jpg"
+.jpg' %}"
+
+.svg"
+.svg' %}"
+```
+
