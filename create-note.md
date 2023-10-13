@@ -191,3 +191,11 @@ replace those in all files:
 .svg' %}"
 ```
 
+# Problem3: urlpattern not found in urls.py /main/urls.py
+
+```
+   ...
+	path('blog/', views.BlogView.as_view(), name="blogs"),
+	path('blog/<slug:slug>', views.BlogDetailView.as_view(), name="blog"),
+	]
+```
