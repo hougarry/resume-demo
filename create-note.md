@@ -121,4 +121,56 @@ exit()
 
 ## take css files , images, js files from bootstrap template and put them in static folder
 
+after this, we can see the css files in the source code of the page.
+however, we still need to tell django where to find these files
+```
+workon resume-demo
+```
 
+### what if your work on is not working? 
+The `workon` command you are trying to use appears to be related to a virtual environment management tool called `virtualenvwrapper`, which is commonly used with Python and Django development. However, the error message suggests that `workon` is not recognized as a valid command, which usually indicates that `virtualenvwrapper` is not installed or configured correctly on your system.
+
+To resolve this issue, you can follow these steps:
+
+1. **Install `virtualenvwrapper`**: If you haven't already installed `virtualenvwrapper`, you can do so using `pip`. Open a terminal and run:
+
+   ```
+   pip install virtualenvwrapper-win
+   ```
+
+   Note that on Windows, you typically use `virtualenvwrapper-win` instead of the standard `virtualenvwrapper` package.
+
+2. **Set Up Virtual Environments**: I'm using windows, so I need to set up the virtual environment in the following way:
+
+   ```bash
+   $env:VIRTUALENVWRAPPER_PYTHON = "D:\Users\Administrator\AppData\Local\Programs\Python\Python311\python.exe"
+
+   ```
+
+
+4. **Create a Virtual Environment**: You can now create a virtual environment for your Django project using the `mkvirtualenv` command:
+
+   ```
+   mkvirtualenv resume_demo
+   ```
+
+   Replace `resume_demo` with the name of your virtual environment.
+
+5. **Activate the Virtual Environment**: Once the virtual environment is created, activate it using the `workon` command:
+
+   ```
+   workon resume_demo
+   python manage.py runserver
+   ```
+
+   You should now be inside your virtual environment, and you can install Django and manage your project within this environment. You can deactivate the virtual environment using the `deactivate` command. Next time you can use `workon resume_demo` to activate the virtual environment.
+
+---
+
+# Problem2: Where is js files, css files, images?
+
+After the static files are collected, they are stored in the static folder in the project root directory. However, the static folder is not accessible by default. To make the static folder accessible, we need to add the following code to the urls.py file in the project root directory:
+
+#### 1. save index.html in templates/main as base.html
+#### 2. create partials folder in templates/main, then create header.html, footer.html, and nav.html
+#### 3. modify base.html and add {% load static %} at the top
