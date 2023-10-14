@@ -7,10 +7,9 @@ from . models import UserProfile
 
 
 #when superuser is created ,it will create the profile,keword argument
+
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
 	if created:
 		userprofile = UserProfile.objects.create(user=instance)
-
-
 		
