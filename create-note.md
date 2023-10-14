@@ -199,3 +199,5 @@ replace those in all files:
 	path('blog/<slug:slug>', views.BlogDetailView.as_view(), name="blog"),
 	]
 ```
+
+python manage.py migrate
