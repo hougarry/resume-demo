@@ -2,7 +2,25 @@
 
 how to deploy this project in vercel
 
-## How to deploy
+## how to deploy on vps
+```
+git clone http ... .git
+pip install -r requirements.txt
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## How to deploy on vercel (it's huge, so it's not allowed on vercel, I failed)
 1. allow vercel to access your github account
 go to setting.py and change allowed host
 
