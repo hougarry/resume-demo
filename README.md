@@ -23,3 +23,6 @@ mistake: I missed comma here :
 
 3. go to wsgi.py and change this line
 app = application
+
+
+4. to deploy on vercel,  I delete pywin32 
