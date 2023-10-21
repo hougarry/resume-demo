@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=@-5)vns*sv2f!4nk!x+(=_d+9$o*@bbmc^@$u-&(&j+-d5&gh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['159.223.207.23', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['159.223.207.23', '127.0.0.1', 'www.garyhou2023.top']
 
 
 # Application definition step 2 : add main and ckeditor
