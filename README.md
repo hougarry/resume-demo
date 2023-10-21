@@ -7,13 +7,33 @@ how to deploy this project in vercel
 git clone http ... .git
 pip install -r requirements.txt
 
+
+
+pip install gcc python3-devel uwsgi
+
+
+uwsgi --http :8000 --module resume_demo.wsgi
+
+sudo apt install nginx
+
+
+
+sudo nano /etc/nginx/sites-available/resume-demo 
+
 ```
 
 
 
 
 
+[Service]
+User=root
+Group=root
+WorkingDirectory=/root/resume-demo
+ExecStart=/root/virt/myenv/bin/gunicorn --workers 3 --bind unix:/root/resume-demo/resume-demo.sock resume_demo.wsgi:application
 
+[Install]
+WantedBy=multi-user.target
 
 
 
@@ -44,3 +64,10 @@ app = application
 
 
 4. to deploy on vercel,  I delete pywin32 
+
+
+
+deploy on render
+
+choose postgresql 
+install dj-dabase-url
