@@ -3,17 +3,17 @@
 font-family: 'Heebo', sans-serif; */
 :root {
   --primaryColor: #3AA3EE;
-  --primaryDarkColor:#002F6B ;
-  --primaryHoverColor: #900AA8;
-  --secondaryColor: #885300;
-  --baseColor: #21243D;
+  --primaryDarkColor:#0098D3 ;
+  --primaryHoverColor: #00B383;
+  --secondaryColor: #00A7AD;
+  --baseColor: #0a35ad; 
   --baseFont: 'Heebo', sans-serif;
   --titleFont: 'Courier Prime', monospace;
   --regular: 400;
   --medium: 500;
   --bold: 700;
   --black: 900;
-  --lightBg: #F1F1F1;
+  --lightBg: rgba(65, 81, 88, 0.506);
 }
 html {
   scroll-behavior: smooth;
@@ -263,7 +263,7 @@ a, .btn {
 	padding: 180px 0 80px;
 }
 .bannerUserImg {
-  margin-left: 30px;
+  margin-left: 10px;
   width: 240px;
   height: 240px;
   border-radius: 50%;
@@ -281,10 +281,10 @@ a, .btn {
   content: "";
   position: absolute;
   left: -5px;
-  top: 13px;
+  top: 15px;
   width: 100%;
   height: 100%;
-  background-color: #EDF7FA;
+  background-color: #fff;
   border-radius: 50%;
 }
 .bannerBtnCol {
