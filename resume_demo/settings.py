@@ -129,7 +129,6 @@ USE_TZ = True
 # step 4 : add static and media url
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'mediafiles')
 ]
 
 STATIC_URL = "/static/"
@@ -143,3 +142,6 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/" # step 5 : add this line
+
+
+# Typically, the STATICFILES_DIRS should only point to directories containing static files that aren’t necessarily tied to a particular app. 
