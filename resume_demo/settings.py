@@ -32,7 +32,7 @@ DEBUG = os.getenv('DEBUG')
 # # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['159.223.207.23', '127.0.0.1', 'www.garyhou2023.top', 'garyhou2023.top']
+ALLOWED_HOSTS = ['159.223.207.23', '127.0.0.1', 'www.garyhou2023.top', 'garyhou2023.top', 'django']
 
 
 # Application definition step 2 : add main and ckeditor
