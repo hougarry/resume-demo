@@ -90,7 +90,7 @@ put this project into this file , here my repo is called dockerhub, put it in do
 then create requirements.txt in dockerhub
 input:
 ```
-django==3.2.4
+
 gunicorn==20.1.0
 ```
 
