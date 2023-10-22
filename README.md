@@ -73,6 +73,16 @@ choose postgresql
 install dj-dabase-url
 
 
+
+
+
+
+
+
+
+
+
+
 How to package this project into Docker
 
 1. create Dockerfile in root
@@ -101,10 +111,11 @@ COPY ./resume_demo  /app
 WORKDIR /app
 
 COPY ./entrypoint.sh /
-ENTRYPOINT ['sh', '/entrypoint.sh']
-
+ENTRYPOINT ["sh", "/entrypoint.sh"]
 
 ```
+
+Docker requires JSON array notation for the CMD and ENTRYPOINT instructions to use double quotes (") rather than single quotes ('). That's why you're seeing the error /bin/sh: [sh,: not found — it's trying to interpret [sh, as a command, which obviously doesn't exist.
 
 Then create entrypoint.sh in dockerhub, input:
 
@@ -118,25 +129,28 @@ gunicorn resume_demo.wsgi:application --bind 0.0.0.0:8000
 
 ```
 
+Ensure that this script has execute permissions (chmod +x entrypoint.sh) so Docker can run it.
 Then create docker-compose.yml in dockerhub, input:
-
+In the nginx service, under the volumes section, you are missing a space after the hyphen - before static:/static.
 ```
+
 version: '3.8'
 
 services:
     django_gunicorn:
         volumes:
-            - static_volume:/app/static
+            - static:/app/static  
         env_file:
             - .env
         build:
             context: .
         ports:
             - "8000:8000"
+            
     nginx:
         build: ./nginx
         volumes:
-            -static:/static
+            - static:/static
         ports:
             - "80:80"
         depends_on:
@@ -144,6 +158,8 @@ services:
 
 volumes:
     static:
+
+
 
 ```
 Then go to setting.py and change SECRET_KEY to os.environ.get('SECRET_KEY')
@@ -167,7 +183,23 @@ SECRET_KEY=
 DEBUG=FALSE
 ```
 
-Then create nginx file in dockerhub, create Dockerfile in nginx, then create default.conf in nginx, input in  default.conf:
+Then create nginx file in dockerhub, my static setting is:
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'mediafiles')
+]
+
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = "/mediafiles/"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
+
+
+
+
+ create Dockerfile in nginx, then create default.conf in nginx, input in  default.conf:
 
 ```
 upstream django {
@@ -182,9 +214,14 @@ server {
     }
 
     location /static {
-        alias /static;
+        alias /app/staticfiles;
+    }
+
+    location /mediafiles {
+        alias /app/mediafiles;
     }
 }
+
 ```
 
 Then create Dockerfile in nginx, input:
@@ -226,3 +263,17 @@ use
         ```
 
         ```
+
+check port
+sudo ss -tuln | grep :80
+sudo service nginx stop
+
+
+
+asgiref==3.7.2
+Django==4.2.6
+django-ckeditor==6.7.0
+django-js-asset==2.1.0
+Pillow==9.5.0
+pytz==2023.3.post1
+sqlparse==0.4.4
