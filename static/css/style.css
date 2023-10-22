@@ -6,14 +6,14 @@ font-family: 'Heebo', sans-serif; */
   --primaryDarkColor:#0098D3 ;
   --primaryHoverColor: #00B383;
   --secondaryColor: #00A7AD;
-  --baseColor: #0a35ad; 
+  --baseColor: #010a14; 
   --baseFont: 'Heebo', sans-serif;
   --titleFont: 'Courier Prime', monospace;
   --regular: 400;
   --medium: 500;
   --bold: 700;
   --black: 900;
-  --lightBg: rgba(65, 81, 88, 0.506);
+  --lightBg: rgba(167, 186, 194, 0.506);
 }
 html {
   scroll-behavior: smooth;
