@@ -150,7 +150,7 @@ services:
     nginx:
         build: ./nginx
         volumes:
-            - static:/static
+            - static:/app/staticfiles
         ports:
             - "80:80"
         depends_on:
@@ -211,14 +211,17 @@ server {
 
     location / {
         proxy_pass http://django;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
     location /static {
-        alias /app/staticfiles;
+        alias /app/staticfiles/;
     }
 
     location /mediafiles {
-        alias /app/mediafiles;
+        alias /app/mediafiles/;
     }
 }
 
@@ -243,6 +246,9 @@ Then in this repo, go to shell input:
 use 
     
         ```
+
+        docker-compose exec django_gunicorn python manage.py collectstatic
+
         docker network ls
 
         docker volume ls
