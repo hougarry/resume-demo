@@ -203,3 +203,94 @@ replace those in all files:
 python manage.py migrate
 
 
+original code:
+
+```html
+
+<section>
+  <div class="sectionSpace pt-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-auto">
+          <div class="keySkillCol">
+            <h4 class="smTitle pb-3">Key Skills</h4>
+            {% for sk in me.userprofile.skills.all %}
+            {% if sk.is_key_skill %}
+            <div class="keySkillCard">
+              {% if sk.image %}
+              <div class="ksIconCol">
+                <img src="{{sk.image.url}}" alt="...">
+              </div>
+              {% endif %}
+              <span class="ksText">{{sk.name}}</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-md">
+          <h4 class="smTitle pb-3">Coding Skills</h4>
+          
+          <div class="progressCol">
+            <div class="progressCard">
+              {% for sk in me.userprofile.skills.all %}
+              {% if not sk.is_key_skill %}             
+              <div class="progressCol">
+                <span class="progressLbl">{{sk.name}}</span>
+                <div class="row g-2 align-items-center">
+                  <div class="col">
+                    <div class="progress progressStyle">
+                      <div class="progress-bar" role="progressbar" style="width: {{sk.score}}%" aria-valuenow="{{sk.score}}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <span class="pLbl">{{sk.score}}%</span>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+```
+original code:
+```python
+
+class Skill(models.Model):
+    class Meta:
+        verbose_name_plural = 'Skills'
+        verbose_name = 'Skill'
+    
+    name = models.CharField(max_length=20, blank=True, null=True)
+    score = models.IntegerField(default=80, blank=True, null=True)
+    image = models.FileField(blank=True, null=True, upload_to="skills")
+    is_key_skill = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.name
+
+class UserProfile(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'User Profiles'
+        verbose_name = 'User Profile'
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(blank=True, null=True, upload_to="avatar")
+    title = models.CharField(max_length=200, blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+    skills = models.ManyToManyField(Skill, blank=True)
+    cv = models.FileField(blank=True, null=True, upload_to="cv")
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+    
+    
