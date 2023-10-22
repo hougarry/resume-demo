@@ -133,6 +133,14 @@ services:
             context: .
         ports:
             - "8000:8000"
+    nginx:
+        build: ./nginx
+        volumes:
+            -static:/static
+        ports:
+            - "80:80"
+        depends_on:
+            - django_gunicorn
 
 volumes:
     static:
@@ -156,7 +164,7 @@ Then create .env in dockerhub, input:
 
 ```
 SECRET_KEY=
-DEBUG=True
+DEBUG=FALSE
 ```
 
 Then create nginx file in dockerhub, create Dockerfile in nginx, then create default.conf in nginx, input in  default.conf:
@@ -177,3 +185,44 @@ server {
         alias /static;
     }
 }
+```
+
+Then create Dockerfile in nginx, input:
+
+```
+FROM nginx:1.19.10-alpine
+
+COPY ./default.conf /etc/nginx/conf.d/default.conf
+
+```
+
+
+Then in this repo, go to shell input:
+    
+    ```
+    docker-compose up --build
+    ```
+
+use 
+    
+        ```
+        docker network ls
+
+        docker volume ls
+        docker volume inspect dockerhub_static
+
+        sudo ls /var/lib/docker/volumes/dockerhub_static/_data
+        sudo ls /var/lib/docker/volumes/dockerhub_static/_data/admin
+
+        docker-compose down
+
+        docker images
+
+        docker rmi dockerhub_gunicorn
+        docker rmi dockerhub_nginx
+
+        docker volume prune # delete all volumes that are not associated with a container
+
+        ```
+
+        ```
