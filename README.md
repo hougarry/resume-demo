@@ -71,3 +71,109 @@ deploy on render
 
 choose postgresql 
 install dj-dabase-url
+
+
+How to package this project into Docker
+
+1. create Dockerfile in root
+put this project into this file , here my repo is called dockerhub, put it in dockerhub.
+then create requirements.txt in dockerhub
+input:
+```
+django==3.2.4
+gunicorn==20.1.0
+```
+
+
+---
+then create Dockerfile in dockerhub, input: 
+
+```
+FROM python:3.9.5-alpine
+
+RUN pip install --upgrade pip
+
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY ./resume_demo  /app
+
+WORKDIR /app
+
+COPY ./entrypoint.sh /
+ENTRYPOINT ['sh', '/entrypoint.sh']
+
+
+```
+
+Then create entrypoint.sh in dockerhub, input:
+
+```
+#!/bin/sh
+
+python manage.py migrate --noinput
+python manage.py collectstatic --noinput
+
+gunicorn resume_demo.wsgi:application --bind 0.0.0.0:8000
+
+```
+
+Then create docker-compose.yml in dockerhub, input:
+
+```
+version: '3.8'
+
+services:
+    django_gunicorn:
+        volumes:
+            - static_volume:/app/static
+        env_file:
+            - .env
+        build:
+            context: .
+        ports:
+            - "8000:8000"
+
+volumes:
+    static:
+
+```
+Then go to setting.py and change SECRET_KEY to os.environ.get('SECRET_KEY')
+
+```
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+DEBUG = os.getenv('DEBUG') 
+
+
+```
+
+
+
+
+
+Then create .env in dockerhub, input:
+
+```
+SECRET_KEY=
+DEBUG=True
+```
+
+Then create nginx file in dockerhub, create Dockerfile in nginx, then create default.conf in nginx, input in  default.conf:
+
+```
+upstream django {
+    server django_gunicorn:8000;
+}
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://django;
+    }
+
+    location /static {
+        alias /static;
+    }
+}
