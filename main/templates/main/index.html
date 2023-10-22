@@ -42,12 +42,12 @@ Start Content
         </div>
         <div class="col-md">
           <div class="bannerContent">
-            <h1 class="xlTitle pb-3">Hi, I’m {{me.first_name|title}}, <br> a {{me.userprofile.title}} </br></h1>
+            <h1 class="xlTitle pb-3">Hi, I’m {{me.first_name|title}}, <br> {{me.userprofile.title}} </br></h1>
             <p>{{me.userprofile.bio}}</p>
             <div class="bannerBtnCol">
               <div class="row">
                 <div class="col-auto">
-                  <a download href="{{me.userprofile.cv.url}}" class="btn btnPrimary">Download Resume</a>
+                  <a download href="{{me.userprofile.cv.url}}" class="btn btnPrimary">Download CV</a>
                 </div>
                 <div class="col-auto">
                   <a href="{% url 'main:contact' %}" class="btn btnOutline">Contact</a>
