@@ -241,6 +241,7 @@ Then in this repo, go to shell input:
     
     ```
     docker-compose up --build
+    docker-compose up -d
     ```
 
 use 
