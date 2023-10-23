@@ -33,6 +33,9 @@ DEBUG = os.getenv('DEBUG')
 # DEBUG = True
 
 ALLOWED_HOSTS = ['159.223.207.23', '127.0.0.1', 'www.garyhou2023.top', 'garyhou2023.top', 'django']
+CSRF_TRUSTED_ORIGINS = ['159.223.207.23', '127.0.0.1', 'www.garyhou2023.top', 'garyhou2023.top', 'django']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition step 2 : add main and ckeditor
@@ -129,6 +132,7 @@ USE_TZ = True
 # step 4 : add static and media url
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'mediafiles')
 ]
 
 STATIC_URL = "/static/"
