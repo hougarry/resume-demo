@@ -139,7 +139,7 @@ version: '3.8'
 services:
     django_gunicorn:
         volumes:
-            - static:/app/static  
+            - static-dest:/app/staticfiles
         env_file:
             - .env
         build:
@@ -150,15 +150,14 @@ services:
     nginx:
         build: ./nginx
         volumes:
-            - static:/app/staticfiles
+            - static-dest:/app/staticfiles
         ports:
             - "80:80"
         depends_on:
             - django_gunicorn
 
 volumes:
-    static:
-
+    static-dest:
 
 
 ```
@@ -250,6 +249,9 @@ use
 
         docker-compose exec django_gunicorn python manage.py collectstatic
 
+        docker exec -it dockerhub-django_gunicorn ls /app/staticfiles
+
+
         docker network ls
 
         docker volume ls
@@ -284,3 +286,15 @@ django-js-asset==2.1.0
 Pillow==9.5.0
 pytz==2023.3.post1
 sqlparse==0.4.4
+
+
+how to delete docker volume
+docker volume ls
+ docker ps -a --filter "volume=dockerhub_static"
+    docker stop 7c3c3c3c3c3c
+    docker rm  7c3c3c3c3c3c
+
+docker volume rm  dockerhub_static
+
+docker exec -it dockerhub-nginx-1 /bin/sh
+curl http://django_gunicorn:8000
