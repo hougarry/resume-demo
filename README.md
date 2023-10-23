@@ -139,25 +139,26 @@ version: '3.8'
 services:
     django_gunicorn:
         volumes:
-            - static-dest:/app/staticfiles
+            - static:/app/staticfiles   # <-- change here
         env_file:
             - .env
         build:
             context: .
         ports:
             - "8000:8000"
-            
+
     nginx:
         build: ./nginx
         volumes:
-            - static-dest:/app/staticfiles
+            - static:/app/staticfiles   # <-- and here
         ports:
             - "80:80"
         depends_on:
             - django_gunicorn
 
 volumes:
-    static-dest:
+    static:                            # <-- and here
+
 
 
 ```
