@@ -33,8 +33,8 @@ DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['159.223.207.23', '127.0.0.1', 'www.garyhou2023.top', 'garyhou2023.top', 'django']
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_DOMAIN = '.garyhou2023.top'
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_DOMAIN = '.garyhou2023.top'
 
 # Application definition step 2 : add main and ckeditor
 
