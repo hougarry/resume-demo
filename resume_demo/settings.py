@@ -29,7 +29,6 @@ DEBUG = os.getenv('DEBUG')
 
 # SECRET_KEY = 'django-insecure-=@-5)vns*sv2f!4nk!x+(=_d+9$o*@bbmc^@$u-&(&j+-d5&gh'
 
-# # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
 ALLOWED_HOSTS = ['159.223.207.23', '127.0.0.1', 'www.garyhou2023.top', 'garyhou2023.top', 'django']
@@ -129,6 +128,7 @@ USE_TZ = True
 # step 4 : add static and media url
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'mediafiles')
 ]
 
 STATIC_URL = "/static/"
